@@ -1,0 +1,34 @@
+{
+ "label": "lapilli-D-route-prior1-r2",
+ "base": "http://127.0.0.1:8080",
+ "started": "2026-11-21 13:41:55",
+ "cases": [
+  {
+   "case": "short-1k",
+   "prompt_tokens": 886,
+   "completion_tokens": 154,
+   "ttft_s": 1.76,
+   "total_s": 4.52,
+   "prefill_tok_s": 504.2,
+   "decode_tok_s": 55.5
+  },
+  {
+   "case": "medium-8k",
+   "prompt_tokens": 6214,
+   "completion_tokens": 141,
+   "ttft_s": 6.3,
+   "total_s": 8.14,
+   "prefill_tok_s": 986.2,
+   "decode_tok_s": 76.0
+  },
+  {
+   "case": "long-32k",
+   "prompt_tokens": 24359,
+   "completion_tokens": 155,
+   "ttft_s": 21.84,
+   "total_s": 24.6,
+   "prefill_tok_s": 1115.2,
+   "decode_tok_s": 55.8
+  }
+ ]
+}

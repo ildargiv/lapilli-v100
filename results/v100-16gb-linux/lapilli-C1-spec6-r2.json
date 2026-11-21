@@ -1,0 +1,34 @@
+{
+ "label": "lapilli-C1-spec6-r2",
+ "base": "http://127.0.0.1:8080",
+ "started": "2026-11-21 13:36:52",
+ "cases": [
+  {
+   "case": "short-1k",
+   "prompt_tokens": 886,
+   "completion_tokens": 146,
+   "ttft_s": 1.75,
+   "total_s": 4.1,
+   "prefill_tok_s": 506.9,
+   "decode_tok_s": 61.7
+  },
+  {
+   "case": "medium-8k",
+   "prompt_tokens": 6214,
+   "completion_tokens": 142,
+   "ttft_s": 6.02,
+   "total_s": 7.86,
+   "prefill_tok_s": 1033.0,
+   "decode_tok_s": 76.5
+  },
+  {
+   "case": "long-32k",
+   "prompt_tokens": 24359,
+   "completion_tokens": 143,
+   "ttft_s": 20.97,
+   "total_s": 23.06,
+   "prefill_tok_s": 1161.6,
+   "decode_tok_s": 67.9
+  }
+ ]
+}

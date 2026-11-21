@@ -1,0 +1,149 @@
+{
+ "label": "lapilli-iq3xxs-vram256",
+ "base": "http://127.0.0.1:8080",
+ "runs": 4,
+ "files": [
+  "/tmp/ab-lapilli-iq3xxs-vram256/lapilli-iq3xxs-vram256-r1.json",
+  "/tmp/ab-lapilli-iq3xxs-vram256/lapilli-iq3xxs-vram256-r2.json",
+  "/tmp/ab-lapilli-iq3xxs-vram256/lapilli-iq3xxs-vram256-r3.json",
+  "/tmp/ab-lapilli-iq3xxs-vram256/lapilli-iq3xxs-vram256-r4.json"
+ ],
+ "results": [
+  {
+   "label": "lapilli-iq3xxs-vram256-r1",
+   "base": "http://127.0.0.1:8080",
+   "started": "2026-11-21 13:28:54",
+   "cases": [
+    {
+     "case": "short-1k",
+     "prompt_tokens": 886,
+     "completion_tokens": 154,
+     "ttft_s": 1.75,
+     "total_s": 4.64,
+     "prefill_tok_s": 506.4,
+     "decode_tok_s": 52.9
+    },
+    {
+     "case": "medium-8k",
+     "prompt_tokens": 6214,
+     "completion_tokens": 142,
+     "ttft_s": 6.05,
+     "total_s": 7.89,
+     "prefill_tok_s": 1027.9,
+     "decode_tok_s": 76.3
+    },
+    {
+     "case": "long-32k",
+     "prompt_tokens": 24359,
+     "completion_tokens": 141,
+     "ttft_s": 20.86,
+     "total_s": 22.75,
+     "prefill_tok_s": 1167.9,
+     "decode_tok_s": 73.8
+    }
+   ]
+  },
+  {
+   "label": "lapilli-iq3xxs-vram256-r2",
+   "base": "http://127.0.0.1:8080",
+   "started": "2026-11-21 13:29:31",
+   "cases": [
+    {
+     "case": "short-1k",
+     "prompt_tokens": 886,
+     "completion_tokens": 154,
+     "ttft_s": 1.75,
+     "total_s": 4.51,
+     "prefill_tok_s": 507.5,
+     "decode_tok_s": 55.4
+    },
+    {
+     "case": "medium-8k",
+     "prompt_tokens": 6214,
+     "completion_tokens": 142,
+     "ttft_s": 6.08,
+     "total_s": 7.92,
+     "prefill_tok_s": 1021.4,
+     "decode_tok_s": 76.6
+    },
+    {
+     "case": "long-32k",
+     "prompt_tokens": 24359,
+     "completion_tokens": 143,
+     "ttft_s": 20.88,
+     "total_s": 23.01,
+     "prefill_tok_s": 1166.8,
+     "decode_tok_s": 66.5
+    }
+   ]
+  },
+  {
+   "label": "lapilli-iq3xxs-vram256-r3",
+   "base": "http://127.0.0.1:8080",
+   "started": "2026-11-21 13:30:08",
+   "cases": [
+    {
+     "case": "short-1k",
+     "prompt_tokens": 886,
+     "completion_tokens": 154,
+     "ttft_s": 1.75,
+     "total_s": 4.72,
+     "prefill_tok_s": 507.0,
+     "decode_tok_s": 51.5
+    },
+    {
+     "case": "medium-8k",
+     "prompt_tokens": 6214,
+     "completion_tokens": 141,
+     "ttft_s": 6.06,
+     "total_s": 7.92,
+     "prefill_tok_s": 1025.7,
+     "decode_tok_s": 75.3
+    },
+    {
+     "case": "long-32k",
+     "prompt_tokens": 24359,
+     "completion_tokens": 147,
+     "ttft_s": 20.89,
+     "total_s": 23.03,
+     "prefill_tok_s": 1166.1,
+     "decode_tok_s": 68.1
+    }
+   ]
+  },
+  {
+   "label": "lapilli-iq3xxs-vram256-r4",
+   "base": "http://127.0.0.1:8080",
+   "started": "2026-11-21 13:30:45",
+   "cases": [
+    {
+     "case": "short-1k",
+     "prompt_tokens": 886,
+     "completion_tokens": 154,
+     "ttft_s": 1.75,
+     "total_s": 4.69,
+     "prefill_tok_s": 507.3,
+     "decode_tok_s": 51.9
+    },
+    {
+     "case": "medium-8k",
+     "prompt_tokens": 6214,
+     "completion_tokens": 142,
+     "ttft_s": 6.09,
+     "total_s": 7.93,
+     "prefill_tok_s": 1019.8,
+     "decode_tok_s": 76.8
+    },
+    {
+     "case": "long-32k",
+     "prompt_tokens": 24359,
+     "completion_tokens": 142,
+     "ttft_s": 20.92,
+     "total_s": 23.01,
+     "prefill_tok_s": 1164.1,
+     "decode_tok_s": 67.7
+    }
+   ]
+  }
+ ]
+}

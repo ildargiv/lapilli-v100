@@ -1,0 +1,149 @@
+{
+ "label": "lapilli-iq3xxs",
+ "base": "http://127.0.0.1:8080",
+ "runs": 4,
+ "files": [
+  "/tmp/ab-lapilli-iq3xxs/lapilli-iq3xxs-r1.json",
+  "/tmp/ab-lapilli-iq3xxs/lapilli-iq3xxs-r2.json",
+  "/tmp/ab-lapilli-iq3xxs/lapilli-iq3xxs-r3.json",
+  "/tmp/ab-lapilli-iq3xxs/lapilli-iq3xxs-r4.json"
+ ],
+ "results": [
+  {
+   "label": "lapilli-iq3xxs-r1",
+   "base": "http://127.0.0.1:8080",
+   "started": "2026-11-21 13:18:31",
+   "cases": [
+    {
+     "case": "short-1k",
+     "prompt_tokens": 886,
+     "completion_tokens": 152,
+     "ttft_s": 1.91,
+     "total_s": 4.38,
+     "prefill_tok_s": 464.2,
+     "decode_tok_s": 61.1
+    },
+    {
+     "case": "medium-8k",
+     "prompt_tokens": 6214,
+     "completion_tokens": 142,
+     "ttft_s": 6.1,
+     "total_s": 7.99,
+     "prefill_tok_s": 1018.5,
+     "decode_tok_s": 74.6
+    },
+    {
+     "case": "long-32k",
+     "prompt_tokens": 24359,
+     "completion_tokens": 141,
+     "ttft_s": 20.88,
+     "total_s": 22.84,
+     "prefill_tok_s": 1166.7,
+     "decode_tok_s": 71.4
+    }
+   ]
+  },
+  {
+   "label": "lapilli-iq3xxs-r2",
+   "base": "http://127.0.0.1:8080",
+   "started": "2026-11-21 13:19:08",
+   "cases": [
+    {
+     "case": "short-1k",
+     "prompt_tokens": 886,
+     "completion_tokens": 154,
+     "ttft_s": 1.74,
+     "total_s": 4.55,
+     "prefill_tok_s": 509.3,
+     "decode_tok_s": 54.4
+    },
+    {
+     "case": "medium-8k",
+     "prompt_tokens": 6214,
+     "completion_tokens": 142,
+     "ttft_s": 6.05,
+     "total_s": 7.86,
+     "prefill_tok_s": 1027.8,
+     "decode_tok_s": 77.9
+    },
+    {
+     "case": "long-32k",
+     "prompt_tokens": 24359,
+     "completion_tokens": 142,
+     "ttft_s": 20.86,
+     "total_s": 22.97,
+     "prefill_tok_s": 1167.5,
+     "decode_tok_s": 67.0
+    }
+   ]
+  },
+  {
+   "label": "lapilli-iq3xxs-r3",
+   "base": "http://127.0.0.1:8080",
+   "started": "2026-11-21 13:19:45",
+   "cases": [
+    {
+     "case": "short-1k",
+     "prompt_tokens": 886,
+     "completion_tokens": 154,
+     "ttft_s": 1.74,
+     "total_s": 4.71,
+     "prefill_tok_s": 507.8,
+     "decode_tok_s": 51.6
+    },
+    {
+     "case": "medium-8k",
+     "prompt_tokens": 6214,
+     "completion_tokens": 142,
+     "ttft_s": 6.01,
+     "total_s": 7.88,
+     "prefill_tok_s": 1034.7,
+     "decode_tok_s": 75.3
+    },
+    {
+     "case": "long-32k",
+     "prompt_tokens": 24359,
+     "completion_tokens": 143,
+     "ttft_s": 20.91,
+     "total_s": 23.0,
+     "prefill_tok_s": 1165.0,
+     "decode_tok_s": 67.9
+    }
+   ]
+  },
+  {
+   "label": "lapilli-iq3xxs-r4",
+   "base": "http://127.0.0.1:8080",
+   "started": "2026-11-21 13:20:22",
+   "cases": [
+    {
+     "case": "short-1k",
+     "prompt_tokens": 886,
+     "completion_tokens": 152,
+     "ttft_s": 1.75,
+     "total_s": 3.93,
+     "prefill_tok_s": 506.3,
+     "decode_tok_s": 69.3
+    },
+    {
+     "case": "medium-8k",
+     "prompt_tokens": 6214,
+     "completion_tokens": 142,
+     "ttft_s": 6.09,
+     "total_s": 7.96,
+     "prefill_tok_s": 1021.2,
+     "decode_tok_s": 75.4
+    },
+    {
+     "case": "long-32k",
+     "prompt_tokens": 24359,
+     "completion_tokens": 142,
+     "ttft_s": 20.88,
+     "total_s": 22.95,
+     "prefill_tok_s": 1166.8,
+     "decode_tok_s": 68.0
+    }
+   ]
+  }
+ ]
+}

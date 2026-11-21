@@ -1,0 +1,34 @@
+{
+ "label": "lapilli-E-tail-skip9-r4",
+ "base": "http://127.0.0.1:8080",
+ "started": "2026-11-21 13:45:49",
+ "cases": [
+  {
+   "case": "short-1k",
+   "prompt_tokens": 886,
+   "completion_tokens": 155,
+   "ttft_s": 1.75,
+   "total_s": 4.65,
+   "prefill_tok_s": 506.1,
+   "decode_tok_s": 53.1
+  },
+  {
+   "case": "medium-8k",
+   "prompt_tokens": 6214,
+   "completion_tokens": 142,
+   "ttft_s": 6.36,
+   "total_s": 8.22,
+   "prefill_tok_s": 977.0,
+   "decode_tok_s": 75.7
+  },
+  {
+   "case": "long-32k",
+   "prompt_tokens": 24359,
+   "completion_tokens": 143,
+   "ttft_s": 22.33,
+   "total_s": 24.41,
+   "prefill_tok_s": 1091.0,
+   "decode_tok_s": 68.0
+  }
+ ]
+}

@@ -1,0 +1,34 @@
+{
+ "label": "lapilli-B-kv-k8v4-r1",
+ "base": "http://127.0.0.1:8080",
+ "started": "2026-11-21 13:33:47",
+ "cases": [
+  {
+   "case": "short-1k",
+   "prompt_tokens": 886,
+   "completion_tokens": 152,
+   "ttft_s": 1.75,
+   "total_s": 4.05,
+   "prefill_tok_s": 506.1,
+   "decode_tok_s": 65.5
+  },
+  {
+   "case": "medium-8k",
+   "prompt_tokens": 6214,
+   "completion_tokens": 142,
+   "ttft_s": 6.11,
+   "total_s": 7.95,
+   "prefill_tok_s": 1016.8,
+   "decode_tok_s": 76.5
+  },
+  {
+   "case": "long-32k",
+   "prompt_tokens": 24359,
+   "completion_tokens": 141,
+   "ttft_s": 20.86,
+   "total_s": 22.74,
+   "prefill_tok_s": 1167.9,
+   "decode_tok_s": 74.4
+  }
+ ]
+}

@@ -1,0 +1,34 @@
+{
+ "label": "lapilli-iq3xxs-r3",
+ "base": "http://127.0.0.1:8080",
+ "started": "2026-11-21 13:19:45",
+ "cases": [
+  {
+   "case": "short-1k",
+   "prompt_tokens": 886,
+   "completion_tokens": 154,
+   "ttft_s": 1.74,
+   "total_s": 4.71,
+   "prefill_tok_s": 507.8,
+   "decode_tok_s": 51.6
+  },
+  {
+   "case": "medium-8k",
+   "prompt_tokens": 6214,
+   "completion_tokens": 142,
+   "ttft_s": 6.01,
+   "total_s": 7.88,
+   "prefill_tok_s": 1034.7,
+   "decode_tok_s": 75.3
+  },
+  {
+   "case": "long-32k",
+   "prompt_tokens": 24359,
+   "completion_tokens": 143,
+   "ttft_s": 20.91,
+   "total_s": 23.0,
+   "prefill_tok_s": 1165.0,
+   "decode_tok_s": 67.9
+  }
+ ]
+}
