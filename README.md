@@ -67,9 +67,49 @@ Full report, with the 16K runs, the quality results and the Linux build:
 A big thank you to nebod99 for the time and care put into these tests, and for sharing them so that every V100 owner can
 benefit from them.
 
+### V100-SXM2 16GB on Linux (community, 2026-11-21)
+
+**One V100-SXM2 16 GB on Linux**, tested by [@ildargiv](https://github.com/ildargiv) (Ubuntu 22.04, Ryzen 5 5600G, AVX2/no AVX-512, 96 GB RAM, NVMe, CUDA 12.9). Model/pack: `Qwen3.8-FN-UD-IQ3_XXS.basalt` from [jesdga/Qwen3.8-Flash-Next-Basalt](https://huggingface.co/jesdga/Qwen3.8-Flash-Next-Basalt) (87.6 GB), **not in Lapilli's officially tested pack list**. API alias kept Strata-compatible: `qwen3.8-flash-next-iq3_s`.
+
+Build:
+
+```bash
+cmake -S . -B build70 -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=70 -DBASALT_MODELS=qwen4exp -DBUILD_TESTING=OFF
+cmake --build build70 -j
+```
+
+Run (16GB-safe baseline used in tests):
+
+```bash
+bin/basalt serve /path/to/Qwen3.8-FN-UD-IQ3_XXS.basalt \
+  --alias qwen3.8-flash-next-iq3_s \
+  --gpu 0 --kv int8 --max-context 262144 \
+  --mmap-experts --resident-experts \
+  --ram-reserve-mib 10240 --vram-reserve-mib 256 \
+  --port 8080
+```
+
+Client-class benchmark (`tools/ab_bench.py` / ai-flight-log harness, streaming TTFT/tok/s, `temperature 0`, `max_tokens 256`, **n=4 medians**, idle, one change at a time). Cases: `short-1k(886)`, `medium-8k(6214)`, `long-32k(24359)` prompt tokens.
+
+| Experiment | short decode | medium decode | long decode | short TTFT | medium TTFT | long TTFT | Notes |
+|---|---:|---:|---:|---:|---:|---:|---|
+| Baseline (`int8`, res700, spec8) | 57.8 | 75.4 | 68.0 | 1.75s | 6.07s | 20.88s | |
+| A `vram-reserve-mib 256` | 52.4 | 76.45 | 67.9 | 1.75s | 6.07s | 20.89s | neutral |
+| B `--kv k8v4` | **67.75** | **76.5** | **74.15** | 1.75s | 6.07s | 20.92s | **KV quality tradeoff** |
+| C1 `--spec 6` | 56.85 | 76.6 | 67.65 | 1.75s | 6.06s | 20.96s | no gain |
+| C2 `--spec 0` | 68.15 | 75.75 | 67.55 | 1.75s | 6.09s | 21.08s | no stable gain |
+| D `--route-prior 1.0` | 55.5 | 76.45 | 67.0 | 1.76s | 6.35s | 21.98s | lossy, worse TTFT/prefill |
+| E `--route-tail-skip 9` | 55.75 | 76.8 | 68.4 | 1.75s | 6.35s | 22.37s | lossy, worse TTFT/prefill |
+
+Strata reference (not apples-to-apples): Strata 0.1.60-cuda12, GSQ-RCO IQ3_S GGUF, kv int8, kv-resident 32768, spec 6, dflash2 q4_0-selq4, expert cache 4497/8.58 GiB, hit 97.7???99.1%, **n=1** client: short 410.3/91.4, medium 869.7/89.3, long 1212.5/94.6 (prefill/decode tok/s). Lapilli base is faster on prefill/TTFT for short/medium, but behind on decode; B (k8v4) partially closes decode at a KV quality tradeoff.
+
+Observed bottlenecks on 16GB: dense ~13.5/13.7 GiB on GPU, `kv 0.7/4.0GiB cuda0 elastic`, `hit ~61-74%`, `pcie 0.0%`. sm_70 warnings: `mid_chain: device not covered (80 SMs, 98304 B optin smem; need 16, 101376): unfused kernels`, `GDN qkv+z without dense_tc_pair (types 14/14, 8/8)`, no AVX-512.
+
+Raw data: [`results/v100-16gb-linux/`](results/v100-16gb-linux/). Detailed notes: [docs/v100-16gb-linux.md](docs/v100-16gb-linux.md). Flight log entry: [ai-flight-log-v100-16gb #006](https://github.com/ildargiv/ai-flight-log-v100-16gb/blob/master/journal/entries/006.md).
+
 ## Requirements
 
-- One or more NVIDIA V100 GPUs. Tested: two V100-SXM2 32 GB; one V100 PCIe 32 GB by a user (see [Tested by users](#tested-by-users)).
+- One or more NVIDIA V100 GPUs. Tested: two V100-SXM2 32 GB; one V100 PCIe 32 GB by a user; one V100-SXM2 16 GB on Linux (community test, see [Tested by users](#tested-by-users)).
 - Windows 10 or 11 x64, or Linux (run by a user with CUDA 12.6.3 in Docker; the build steps below are for Windows).
 - CUDA Toolkit 12.6 to 12.9 (CUDA 13 dropped Volta), the Visual Studio 2022 Build Tools (C++), CMake 3.24+, Python 3.10+.
 - System RAM and a fast SSD for the experts that do not fit in VRAM: the pack is 115 GB. Tested with 96 GB of RAM.
@@ -135,7 +175,7 @@ best measured on V100, and they are not meant as settings.
 
 ## Not tested
 
-V100 16 GB cards; NVLink with peer access on; packs other than `UD-Q4_K_XL` and `IQ3_S`; Basalt's other models (DeepSeek-V4.1-Flash and
+NVLink with peer access on; packs other than `UD-Q4_K_XL`, `IQ3_S` and `UD-IQ3_XXS` (community-tested on V100 16GB: `UD-IQ3_XXS`, see [community test](#v100-sxm2-16gb-on-linux-community-2026-11-21)); Basalt's other models (DeepSeek-V4.1-Flash and
 Qwen3.8-27B are not built: `-DBASALT_MODELS=qwen4exp`); Blackwell builds of this fork.
 
 ## Support
