@@ -101,7 +101,7 @@ Client-class benchmark (`tools/ab_bench.py` / ai-flight-log harness, streaming T
 | D `--route-prior 1.0` | 55.5 | 76.45 | 67.0 | 1.76s | 6.35s | 21.98s | lossy, worse TTFT/prefill |
 | E `--route-tail-skip 9` | 55.75 | 76.8 | 68.4 | 1.75s | 6.35s | 22.37s | lossy, worse TTFT/prefill |
 
-Strata reference (not apples-to-apples): Strata 0.1.60-cuda12, GSQ-RCO IQ3_S GGUF, kv int8, kv-resident 32768, spec 6, dflash2 q4_0-selq4, expert cache 4497/8.58 GiB, hit 97.7???99.1%, **n=1** client: short 410.3/91.4, medium 869.7/89.3, long 1212.5/94.6 (prefill/decode tok/s). Lapilli base is faster on prefill/TTFT for short/medium, but behind on decode; B (k8v4) partially closes decode at a KV quality tradeoff.
+Strata reference (not apples-to-apples): Strata 0.1.60-cuda12, GSQ-RCO IQ3_S GGUF, kv int8, kv-resident 32768, spec 6, dflash2 q4_0-selq4, expert cache 4497/8.58 GiB, hit 97.7-99.1%, **n=1** client: short 410.3/91.4, medium 869.7/89.3, long 1212.5/94.6 (prefill/decode tok/s). Lapilli base is faster on prefill/TTFT for short/medium, but behind on decode; B (k8v4) partially closes decode at a KV quality tradeoff.
 
 Observed bottlenecks on 16GB: dense ~13.5/13.7 GiB on GPU, `kv 0.7/4.0GiB cuda0 elastic`, `hit ~61-74%`, `pcie 0.0%`. sm_70 warnings: `mid_chain: device not covered (80 SMs, 98304 B optin smem; need 16, 101376): unfused kernels`, `GDN qkv+z without dense_tc_pair (types 14/14, 8/8)`, no AVX-512.
 

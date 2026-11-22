@@ -1,4 +1,4 @@
-# V100 16GB (Linux) ??? Lapilli notes
+# V100 16GB (Linux) - Lapilli notes
 
 Tested on **Tesla V100-SXM2-16GB** (linux1, Ubuntu 22.04, Ryzen 5 5600G AVX2/no AVX-512, 96 GiB RAM, NVMe, CUDA 12.9). Upstream Lapilli README marks V100 16GB as not tested.
 
@@ -57,7 +57,7 @@ Warnings seen on V100 sm_70:
 
 ## Strata reference (not apples-to-apples)
 
-Strata 0.1.60-cuda12, GSQ-RCO IQ3_S GGUF, kv int8, kv-resident 32768, spec 6, dflash2 q4_0-selq4, expert cache 4497/8.58 GiB, hit 97.7???99.1%, n=1 (ai-flight-log-v100-16gb):
+Strata 0.1.60-cuda12, GSQ-RCO IQ3_S GGUF, kv int8, kv-resident 32768, spec 6, dflash2 q4_0-selq4, expert cache 4497/8.58 GiB, hit 97.7-99.1%, n=1 (ai-flight-log-v100-16gb):
 
 | Case | Strata decode | Lapilli base decode | Lapilli B k8v4 decode | Strata prefill | Lapilli base prefill |
 |---|---:|---:|---:|---:|---:|
