@@ -1,0 +1,231 @@
+{
+ "label": "base-int8",
+ "base": "http://127.0.0.1:8080",
+ "model": "qwen3.8-flash-next-iq3_s",
+ "started": "2026-11-22 22:29:10",
+ "passed": 20,
+ "total": 20,
+ "score": "20/20",
+ "results": [
+  {
+   "prompt": "What is 2+2? Answer with the number only.",
+   "expected": "4",
+   "pass": true,
+   "content": "4",
+   "reasoning": "",
+   "finish_reason": "stop",
+   "prompt_tokens": 25,
+   "completion_tokens": 2,
+   "elapsed_s": 0.53
+  },
+  {
+   "prompt": "What is 17*23? Answer with the number only.",
+   "expected": "391",
+   "pass": true,
+   "content": "391",
+   "reasoning": "",
+   "finish_reason": "stop",
+   "prompt_tokens": 27,
+   "completion_tokens": 4,
+   "elapsed_s": 0.56
+  },
+  {
+   "prompt": "What is 144/12? Answer with the number only.",
+   "expected": "12",
+   "pass": true,
+   "content": "12",
+   "reasoning": "",
+   "finish_reason": "stop",
+   "prompt_tokens": 28,
+   "completion_tokens": 3,
+   "elapsed_s": 0.52
+  },
+  {
+   "prompt": "What is 2**10? Answer with the number only.",
+   "expected": "1024",
+   "pass": true,
+   "content": "1024",
+   "reasoning": "",
+   "finish_reason": "stop",
+   "prompt_tokens": 26,
+   "completion_tokens": 5,
+   "elapsed_s": 0.5
+  },
+  {
+   "prompt": "What is the square root of 81? Answer with the number only.",
+   "expected": "9",
+   "pass": true,
+   "content": "9",
+   "reasoning": "",
+   "finish_reason": "stop",
+   "prompt_tokens": 28,
+   "completion_tokens": 2,
+   "elapsed_s": 0.46
+  },
+  {
+   "prompt": "What is 15% of 200? Answer with the number only.",
+   "expected": "30",
+   "pass": true,
+   "content": "30",
+   "reasoning": "",
+   "finish_reason": "stop",
+   "prompt_tokens": 30,
+   "completion_tokens": 3,
+   "elapsed_s": 0.48
+  },
+  {
+   "prompt": "What is 100-37? Answer with the number only.",
+   "expected": "63",
+   "pass": true,
+   "content": "63",
+   "reasoning": "",
+   "finish_reason": "stop",
+   "prompt_tokens": 28,
+   "completion_tokens": 3,
+   "elapsed_s": 0.43
+  },
+  {
+   "prompt": "What is 9*9? Answer with the number only.",
+   "expected": "81",
+   "pass": true,
+   "content": "81",
+   "reasoning": "",
+   "finish_reason": "stop",
+   "prompt_tokens": 25,
+   "completion_tokens": 3,
+   "elapsed_s": 0.39
+  },
+  {
+   "prompt": "What is the capital of France? Answer with one word.",
+   "expected": "paris",
+   "pass": true,
+   "content": "Paris",
+   "reasoning": "",
+   "finish_reason": "stop",
+   "prompt_tokens": 24,
+   "completion_tokens": 2,
+   "elapsed_s": 0.39
+  },
+  {
+   "prompt": "What is the capital of Japan? Answer with one word.",
+   "expected": "tokyo",
+   "pass": true,
+   "content": "Tokyo",
+   "reasoning": "",
+   "finish_reason": "stop",
+   "prompt_tokens": 24,
+   "completion_tokens": 3,
+   "elapsed_s": 0.41
+  },
+  {
+   "prompt": "Which planet is the largest in the solar system? Answer with one word.",
+   "expected": "jupiter",
+   "pass": true,
+   "content": "Jupiter",
+   "reasoning": "",
+   "finish_reason": "stop",
+   "prompt_tokens": 27,
+   "completion_tokens": 3,
+   "elapsed_s": 0.46
+  },
+  {
+   "prompt": "What is the chemical symbol for gold? Answer with the symbol only.",
+   "expected": "au",
+   "pass": true,
+   "content": "Au",
+   "reasoning": "",
+   "finish_reason": "stop",
+   "prompt_tokens": 26,
+   "completion_tokens": 2,
+   "elapsed_s": 0.39
+  },
+  {
+   "prompt": "How many days are in a leap year? Answer with the number only.",
+   "expected": "366",
+   "pass": true,
+   "content": "366",
+   "reasoning": "",
+   "finish_reason": "stop",
+   "prompt_tokens": 27,
+   "completion_tokens": 4,
+   "elapsed_s": 0.36
+  },
+  {
+   "prompt": "Reverse the string abc. Answer with the result only.",
+   "expected": "cba",
+   "pass": true,
+   "content": "cba",
+   "reasoning": "",
+   "finish_reason": "stop",
+   "prompt_tokens": 23,
+   "completion_tokens": 2,
+   "elapsed_s": 0.34
+  },
+  {
+   "prompt": "How many letters are in the word banana? Answer with the number only.",
+   "expected": "6",
+   "pass": true,
+   "content": "6",
+   "reasoning": "",
+   "finish_reason": "stop",
+   "prompt_tokens": 27,
+   "completion_tokens": 2,
+   "elapsed_s": 0.35
+  },
+  {
+   "prompt": "In Python, what is len([1,2,3])? Answer with the number only.",
+   "expected": "3",
+   "pass": true,
+   "content": "3",
+   "reasoning": "",
+   "finish_reason": "stop",
+   "prompt_tokens": 32,
+   "completion_tokens": 2,
+   "elapsed_s": 0.42
+  },
+  {
+   "prompt": "In Python, what is 'abc'[::-1]? Answer with the result only.",
+   "expected": "cba",
+   "pass": true,
+   "content": "cba",
+   "reasoning": "",
+   "finish_reason": "stop",
+   "prompt_tokens": 29,
+   "completion_tokens": 2,
+   "elapsed_s": 0.38
+  },
+  {
+   "prompt": "What is the binary representation of 5? Answer with the digits only.",
+   "expected": "101",
+   "pass": true,
+   "content": "101",
+   "reasoning": "",
+   "finish_reason": "stop",
+   "prompt_tokens": 27,
+   "completion_tokens": 4,
+   "elapsed_s": 0.34
+  },
+  {
+   "prompt": "What is 7 in binary? Answer with the digits only.",
+   "expected": "111",
+   "pass": true,
+   "content": "111",
+   "reasoning": "",
+   "finish_reason": "stop",
+   "prompt_tokens": 25,
+   "completion_tokens": 4,
+   "elapsed_s": 0.29
+  },
+  {
+   "prompt": "Столица России? Ответь одним словом.",
+   "expected": "москва",
+   "pass": true,
+   "content": "Москва",
+   "reasoning": "",
+   "finish_reason": "stop",
+   "prompt_tokens": 21,
+   "completion_tokens": 2,
+   "elapsed_s": 0.3
+  }
+ ]
+}

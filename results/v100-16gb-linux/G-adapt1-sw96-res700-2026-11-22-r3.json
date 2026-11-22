@@ -1,0 +1,34 @@
+{
+ "label": "G-adapt1-sw96-res700-2026-11-22-r3",
+ "base": "http://127.0.0.1:8080",
+ "started": "2026-11-22 22:27:15",
+ "cases": [
+  {
+   "case": "short-1k",
+   "prompt_tokens": 886,
+   "completion_tokens": 152,
+   "ttft_s": 1.78,
+   "total_s": 3.97,
+   "prefill_tok_s": 497.2,
+   "decode_tok_s": 69.1
+  },
+  {
+   "case": "medium-8k",
+   "prompt_tokens": 6214,
+   "completion_tokens": 141,
+   "ttft_s": 6.01,
+   "total_s": 7.86,
+   "prefill_tok_s": 1034.6,
+   "decode_tok_s": 75.5
+  },
+  {
+   "case": "long-32k",
+   "prompt_tokens": 24359,
+   "completion_tokens": 142,
+   "ttft_s": 20.76,
+   "total_s": 22.93,
+   "prefill_tok_s": 1173.4,
+   "decode_tok_s": 65.1
+  }
+ ]
+}

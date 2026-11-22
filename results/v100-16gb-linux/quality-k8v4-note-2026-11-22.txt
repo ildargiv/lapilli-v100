@@ -1,0 +1,4 @@
+k8v4 quality smoke on stable 16GB config was not completed.
+Reason: --kv k8v4 is incompatible with --kv-resident streaming in tested build.
+Engine error: "--kv k8v4 does not support --kv-resident streaming (yet)"
+Base int8 smoke: 20/20 (see quality-k8v4-base-int8-2026-11-22.json).

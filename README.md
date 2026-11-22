@@ -67,7 +67,7 @@ Full report, with the 16K runs, the quality results and the Linux build:
 A big thank you to nebod99 for the time and care put into these tests, and for sharing them so that every V100 owner can
 benefit from them.
 
-### V100-SXM2 16GB on Linux (community, 2026-11-21)
+### V100-SXM2 16GB on Linux (community, 2026-11-21/22)
 
 **One V100-SXM2 16 GB on Linux**, tested by [@ildargiv](https://github.com/ildargiv) (Ubuntu 22.04, Ryzen 5 5600G, AVX2/no AVX-512, 96 GB RAM, NVMe, CUDA 12.9). Model/pack: `Qwen3.8-FN-UD-IQ3_XXS.basalt` from [jesdga/Qwen3.8-Flash-Next-Basalt](https://huggingface.co/jesdga/Qwen3.8-Flash-Next-Basalt) (87.6 GB), **not in Lapilli's officially tested pack list**. API alias kept Strata-compatible: `qwen3.8-flash-next-iq3_s`.
 
@@ -78,34 +78,36 @@ cmake -S . -B build70 -DCMAKE_BUILD_TYPE=Release -DCMAKE_CUDA_ARCHITECTURES=70 -
 cmake --build build70 -j
 ```
 
-Run (16GB-safe baseline used in tests):
+Run (16GB-stable, 2026-11-22):
 
 ```bash
 bin/basalt serve /path/to/Qwen3.8-FN-UD-IQ3_XXS.basalt \
   --alias qwen3.8-flash-next-iq3_s \
-  --gpu 0 --kv int8 --max-context 262144 \
+  --gpu 0 --kv int8 --kv-resident 32768 --max-context 262144 \
   --mmap-experts --resident-experts \
-  --ram-reserve-mib 10240 --vram-reserve-mib 256 \
+  --ram-reserve-mib 10240 --vram-reserve-mib 700 \
   --port 8080
 ```
 
-Client-class benchmark (`tools/ab_bench.py` / ai-flight-log harness, streaming TTFT/tok/s, `temperature 0`, `max_tokens 256`, **n=4 medians**, idle, one change at a time). Cases: `short-1k(886)`, `medium-8k(6214)`, `long-32k(24359)` prompt tokens.
+> OOM finding (2026-11-22): with `vram-reserve-mib 256` and no `kv-resident`, auto expert cache grew to ~9.3-9.6 GiB and 8k/32k prefill hit `cudaMalloc/mmq out of memory`. Stable fix: `--kv-resident 32768 --vram-reserve-mib 700`. `--kv k8v4` is incompatible with `--kv-resident` in the tested build.
 
-| Experiment | short decode | medium decode | long decode | short TTFT | medium TTFT | long TTFT | Notes |
+Client-class benchmark (`tools/ab_bench.py`, streaming TTFT/tok/s, `temperature 0`, `max_tokens 256`, **n=4 medians**, idle, one change at a time). Cases: `short-1k(886)`, `medium-8k(6214)`, `long-32k(24359)`.
+
+| Experiment | short dec | medium dec | long dec | short TTFT | medium TTFT | long TTFT | Notes |
 |---|---:|---:|---:|---:|---:|---:|---|
-| Baseline (`int8`, res700, spec8) | 57.8 | 75.4 | 68.0 | 1.75s | 6.07s | 20.88s | |
+| Baseline 21.11 (int8, res256) | 57.8 | 75.4 | 68.0 | 1.75s | 6.07s | 20.88s | pre-OOM-fix |
 | A `vram-reserve-mib 256` | 52.4 | 76.45 | 67.9 | 1.75s | 6.07s | 20.89s | neutral |
-| B `--kv k8v4` | **67.75** | **76.5** | **74.15** | 1.75s | 6.07s | 20.92s | **KV quality tradeoff** |
+| B `--kv k8v4` | **67.75** | **76.5** | **74.15** | 1.75s | 6.07s | 20.92s | KV quality tradeoff; incompatible with kv-resident |
 | C1 `--spec 6` | 56.85 | 76.6 | 67.65 | 1.75s | 6.06s | 20.96s | no gain |
 | C2 `--spec 0` | 68.15 | 75.75 | 67.55 | 1.75s | 6.09s | 21.08s | no stable gain |
-| D `--route-prior 1.0` | 55.5 | 76.45 | 67.0 | 1.76s | 6.35s | 21.98s | lossy, worse TTFT/prefill |
-| E `--route-tail-skip 9` | 55.75 | 76.8 | 68.4 | 1.75s | 6.35s | 22.37s | lossy, worse TTFT/prefill |
+| D `--route-prior 1.0` | 55.5 | 76.45 | 67.0 | 1.76s | 6.35s | 21.98s | lossy |
+| E `--route-tail-skip 9` | 55.75 | 76.8 | 68.4 | 1.75s | 6.35s | 22.37s | lossy |
+| **F stable (kv-resident 32768, res700)** | **67.75** | **75.95** | **70.35** | **1.78s** | **6.02s** | **20.75s** | **stable 16GB, no OOM** |
+| G stable + adapt-every1/swaps96 | 67.7 | 75.15 | 68.25 | 1.79s | 6.03s | 20.77s | no gain |
 
-Strata reference (not apples-to-apples): Strata 0.1.60-cuda12, GSQ-RCO IQ3_S GGUF, kv int8, kv-resident 32768, spec 6, dflash2 q4_0-selq4, expert cache 4497/8.58 GiB, hit 97.7-99.1%, **n=1** client: short 410.3/91.4, medium 869.7/89.3, long 1212.5/94.6 (prefill/decode tok/s). Lapilli base is faster on prefill/TTFT for short/medium, but behind on decode; B (k8v4) partially closes decode at a KV quality tradeoff.
+Strata reference (not apples-to-apples, n=1, client): short 410.3/91.4, medium 869.7/89.3, long 1212.5/94.6 (prefill/decode tok/s), hit 97.7-99.1%, cache 4497/8.58 GiB. Lapilli F: faster prefill on short/medium, similar long prefill, lower decode; hit ~73% at similar cache size (4602/8.82 GiB).
 
-Observed bottlenecks on 16GB: dense ~13.5/13.7 GiB on GPU, `kv 0.7/4.0GiB cuda0 elastic`, `hit ~61-74%`, `pcie 0.0%`. sm_70 warnings: `mid_chain: device not covered (80 SMs, 98304 B optin smem; need 16, 101376): unfused kernels`, `GDN qkv+z without dense_tc_pair (types 14/14, 8/8)`, no AVX-512.
-
-Raw data: [`results/v100-16gb-linux/`](results/v100-16gb-linux/). Detailed notes: [docs/v100-16gb-linux.md](docs/v100-16gb-linux.md). Flight log entry: [ai-flight-log-v100-16gb #006](https://github.com/ildargiv/ai-flight-log-v100-16gb/blob/master/journal/entries/006.md).
+Raw data: [`results/v100-16gb-linux/`](results/v100-16gb-linux/). Detailed notes: [docs/v100-16gb-linux.md](docs/v100-16gb-linux.md). Flight log: [#006](https://github.com/ildargiv/ai-flight-log-v100-16gb/blob/master/journal/entries/006.md), [#007](https://github.com/ildargiv/ai-flight-log-v100-16gb/blob/master/journal/entries/007.md).
 
 ## Requirements
 

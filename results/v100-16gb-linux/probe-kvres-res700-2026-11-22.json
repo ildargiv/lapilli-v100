@@ -1,0 +1,34 @@
+{
+ "label": "probe-kvres-res700",
+ "base": "http://127.0.0.1:8080",
+ "started": "2026-11-22 22:18:37",
+ "cases": [
+  {
+   "case": "short-1k",
+   "prompt_tokens": 886,
+   "completion_tokens": 154,
+   "ttft_s": 1.94,
+   "total_s": 5.25,
+   "prefill_tok_s": 456.5,
+   "decode_tok_s": 46.3
+  },
+  {
+   "case": "medium-8k",
+   "prompt_tokens": 6214,
+   "completion_tokens": 142,
+   "ttft_s": 6.02,
+   "total_s": 7.91,
+   "prefill_tok_s": 1032.2,
+   "decode_tok_s": 74.6
+  },
+  {
+   "case": "long-32k",
+   "prompt_tokens": 24359,
+   "completion_tokens": 142,
+   "ttft_s": 20.79,
+   "total_s": 22.88,
+   "prefill_tok_s": 1171.8,
+   "decode_tok_s": 67.5
+  }
+ ]
+}

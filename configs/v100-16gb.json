@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "models": [
+    {
+      "model": "../models/Qwen3.8-FN-UD-IQ3_XXS.basalt",
+      "alias": "qwen3.8-flash-next-iq3_s",
+      "gpu": "0"
+    }
+  ],
+  "engine": {
+    "kv": "int8",
+    "kv-resident": 32768,
+    "max-context": 262144,
+    "mmap-experts": true,
+    "resident-experts": true,
+    "ram-reserve-mib": 10240,
+    "vram-reserve-mib": 700
+  },
+  "server": {
+    "port": 8080
+  }
+}
+
